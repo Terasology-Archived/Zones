@@ -23,6 +23,7 @@ import org.terasology.asset.Assets;
 import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.math.Region3i;
+import org.terasology.math.Vector2i;
 import org.terasology.math.Vector3i;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.rendering.assets.texture.Texture;
@@ -30,7 +31,6 @@ import org.terasology.rendering.assets.texture.TextureUtil;
 import org.terasology.rendering.nui.UIScreenLayer;
 import org.terasology.rendering.nui.UIWidget;
 import org.terasology.rendering.nui.itemRendering.StringTextRenderer;
-import org.terasology.rendering.nui.layouts.RowLayout;
 import org.terasology.rendering.nui.layouts.ColumnLayout;
 import org.terasology.rendering.nui.layouts.RowLayoutHint;
 import org.terasology.rendering.nui.layouts.relative.HorizontalHint;
@@ -44,6 +44,7 @@ import org.terasology.rendering.nui.widgets.UIDropdown;
 import org.terasology.rendering.nui.widgets.UIImage;
 import org.terasology.rendering.nui.widgets.UILabel;
 import org.terasology.rendering.nui.widgets.UIList;
+import org.terasology.rendering.nui.widgets.UISpace;
 import org.terasology.rendering.nui.widgets.UIText;
 import org.terasology.world.selection.BlockSelectionComponent;
 import org.terasology.zone.Constants;
@@ -118,8 +119,8 @@ public class UIZoneBook extends UIScreenLayer {
 
             if (null != currentZoneList) {
                 uizonelist.setList(currentZoneList);
-                cmbType.setVisible(false);
                 uizonelist.setVisible(true);
+                uizonelistgroup.setVisible(false);
                 btnBack.setVisible(true);
             }
         }
@@ -129,9 +130,9 @@ public class UIZoneBook extends UIScreenLayer {
 
         @Override
         public void onItemActivated(UIWidget widget, EntityRef item) {
-            if (cmbType.isVisible()) {
-                cmbType.setVisible(false);
-            }
+//            if (cmbType.isVisible()) {
+//                cmbType.setVisible(false);
+//            }
             lblError.setText("");
             hideSelectedZone();
             EntityRef zone = item;
@@ -175,6 +176,7 @@ public class UIZoneBook extends UIScreenLayer {
         //        maximize();
         //        setCloseKeys(new int[]{Keyboard.KEY_ESCAPE});
 
+        
         RelativeLayout windowLayout = new RelativeLayout();
         this.setContents(windowLayout);
 
@@ -222,7 +224,7 @@ public class UIZoneBook extends UIScreenLayer {
 //        uizonelist.setPosition(new Vector2f(40, 20));
         RelativeLayoutHint uizonelistRelativeLayoutHint = new RelativeLayoutHint(
                 HorizontalHint.create().center(), // TODO: 40
-                VerticalHint.create().center()); // TODO: 20
+                VerticalHint.create().alignBottom()); // TODO: 20
         uizonelistRelativeLayoutHint.setWidth(200);
         uizonelistRelativeLayoutHint.setHeight(220);
         bookLeftPageLayout.addWidget(uizonelist, uizonelistRelativeLayoutHint);
@@ -234,7 +236,7 @@ public class UIZoneBook extends UIScreenLayer {
         //        uizonelistgroup.setPosition(new Vector2f(40, 20));
         RelativeLayoutHint uizonelistgroupRelativeLayoutHint = new RelativeLayoutHint(
                 HorizontalHint.create().center(), // TODO: 40
-                VerticalHint.create().center()); // TODO: 20
+                VerticalHint.create().alignTop()); // TODO: 20
         uizonelistgroupRelativeLayoutHint.setWidth(200);
         uizonelistgroupRelativeLayoutHint.setHeight(250);
         bookLeftPageLayout.addWidget(uizonelistgroup, uizonelistgroupRelativeLayoutHint);
@@ -418,6 +420,26 @@ public class UIZoneBook extends UIScreenLayer {
         btnBackRelativeLayoutHint.setHeight(20);
         bookRightPageLayout.addWidget(btnBack, btnBackRelativeLayoutHint);
 
+        UIButton btnClose = new UIButton();
+        btnClose.setText("Close");
+        btnClose.setVisible(true);
+        btnClose.subscribe(new ActivateEventListener() {
+            @Override
+            public void onActivated(UIWidget widget) {
+                close();
+            }
+        });
+        RelativeLayoutHint btnCloseRelativeLayoutHint = new RelativeLayoutHint(
+                HorizontalHint.create().center(), // TODO: 40
+                VerticalHint.create().center()); // TODO: 240
+        btnCloseRelativeLayoutHint.setWidth(50);
+        btnCloseRelativeLayoutHint.setHeight(20);
+        bookRightPageLayout.addWidget(btnClose, btnCloseRelativeLayoutHint);
+
+
+
+        UISpace fillUpSpace = new UISpace(new Vector2i(1, 60));
+        bookRightPageLayout.addWidget(fillUpSpace);
     }
 
     private void saveZone() {
