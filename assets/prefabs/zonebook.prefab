@@ -15,8 +15,7 @@
  */
 {
     "Item" : {
-        "name" : "zoning book",
-        "icon" : "zonebook",
+        "icon" : "zones:zoneicons16.zonebook",
         "usage" : "ON_USER",
         "consumedOnUse" : false,
         "renderWithIcon" : false

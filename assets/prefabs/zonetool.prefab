@@ -16,7 +16,7 @@
 {
     "Item" : {
         "name" : "Zoning tool",
-        "icon" : "zonetool",
+        "icon" : "zones:zoneicons16.zonetool",
         "usage" : "ON_BLOCK",
         "consumedOnUse" : false,
         "renderWithIcon" : true
