@@ -35,7 +35,6 @@ import org.terasology.rendering.assets.texture.Texture;
 import org.terasology.rendering.assets.texture.TextureUtil;
 import org.terasology.world.selection.BlockSelectionComponent;
 import org.terasology.zone.Constants;
-import org.terasology.zone.icons.IconLoader;
 
 @Share(ZoneToolSystem.class)
 @RegisterSystem(RegisterMode.AUTHORITY)
@@ -51,7 +50,6 @@ public class ZoneToolSystem implements ComponentSystem {
 
     @Override
     public void initialise() {
-        IconLoader.loadIcons();
         BlockSelectionComponent blockSelectionComponent = new BlockSelectionComponent();
         Color transparentGreen = new Color(0, 255, 0, 100);
         blockSelectionComponent.texture = Assets.get(TextureUtil.getTextureUriForColor(transparentGreen), Texture.class);
