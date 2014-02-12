@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 {
+    "DisplayName" : {
+        "name" : "Zoning book"
+    },
     "Item" : {
         "icon" : "zones:zoneicons16.zonebook",
         "usage" : "ON_USER",

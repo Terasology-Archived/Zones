@@ -17,6 +17,8 @@ package org.terasology.zone.selection;
 
 import java.awt.Color;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.terasology.asset.Assets;
 import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.entitySystem.entity.EntityRef;
@@ -26,6 +28,7 @@ import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.inventory.InventoryComponent;
 import org.terasology.logic.inventory.InventoryManager;
+import org.terasology.logic.inventory.action.GiveItemAction;
 import org.terasology.logic.players.event.OnPlayerSpawnedEvent;
 import org.terasology.logic.selection.ApplyBlockSelectionEvent;
 import org.terasology.math.Region3i;
@@ -39,6 +42,7 @@ import org.terasology.zone.Constants;
 @Share(ZoneToolSystem.class)
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class ZoneToolSystem implements ComponentSystem {
+    private static final Logger logger = LoggerFactory.getLogger(ZoneToolSystem.class);
 
     @In
     private EntityManager entityManager;
@@ -59,8 +63,19 @@ public class ZoneToolSystem implements ComponentSystem {
 
     @ReceiveEvent
     public void onPlayerSpawn(OnPlayerSpawnedEvent event, EntityRef player, InventoryComponent inventory) {
-        inventoryManager.giveItem(player, entityManager.create(Constants.MODULE_NAME + ":" + "zonetool"));
-        inventoryManager.giveItem(player, entityManager.create(Constants.MODULE_NAME + ":" + "zonebook"));
+        createAndGiveItemToPlayerIfPossible(Constants.MODULE_NAME + ":" + "zonebook", player);
+        createAndGiveItemToPlayerIfPossible(Constants.MODULE_NAME + ":" + "zonetool", player);
+    }
+
+    private void createAndGiveItemToPlayerIfPossible(String uri, EntityRef player) {
+        EntityRef item = entityManager.create(uri);
+        GiveItemAction action = new GiveItemAction(EntityRef.NULL, item);
+        player.send(action);
+        if (!action.isConsumed()) {
+            logger.warn(uri + " could not be created and given to player.");
+            item.destroy();
+        }
+            
     }
 
     public void setCurrentlySelectedRegion(Region3i currentBlockSelectionRegion) {

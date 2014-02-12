@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 {
+    "DisplayName" : {
+        "name" : "Zoning tool"
+    },
     "Item" : {
-        "name" : "Zoning tool",
         "icon" : "zones:zoneicons16.zonetool",
         "usage" : "ON_BLOCK",
         "consumedOnUse" : false,

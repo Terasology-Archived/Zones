@@ -28,7 +28,7 @@ import org.terasology.math.Vector3i;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.rendering.assets.texture.Texture;
 import org.terasology.rendering.assets.texture.TextureUtil;
-import org.terasology.rendering.nui.UIScreenLayer;
+import org.terasology.rendering.nui.CoreScreenLayer;
 import org.terasology.rendering.nui.UIWidget;
 import org.terasology.rendering.nui.itemRendering.StringTextRenderer;
 import org.terasology.rendering.nui.layouts.ColumnLayout;
@@ -53,7 +53,7 @@ import org.terasology.zone.ZoneTrackingSystem;
 import org.terasology.zone.ZoneType;
 import org.terasology.zone.selection.ZoneToolSystem;
 
-public class UIZoneBook extends UIScreenLayer {
+public class UIZoneBook extends CoreScreenLayer {
     private static final int MAX_SELECTED_BOUNDS = 50;
 
     /*
@@ -567,7 +567,6 @@ public class UIZoneBook extends UIScreenLayer {
 
     @Override
     public void initialise() {
-        super.initialise();
         open();
     }
 
