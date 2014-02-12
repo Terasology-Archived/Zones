@@ -111,4 +111,28 @@ public class ZoneToolSystem implements ComponentSystem {
     public void onSelection(ApplyBlockSelectionEvent event, EntityRef entity) {
         setCurrentlySelectedRegion(event.getSelection());
     }
+
+    @Override
+    public void preBegin() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void postBegin() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void preSave() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void postSave() {
+        // TODO Auto-generated method stub
+        
+    }
 }

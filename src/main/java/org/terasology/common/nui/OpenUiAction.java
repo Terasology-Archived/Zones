@@ -56,4 +56,28 @@ public class OpenUiAction implements ComponentSystem {
             }
         }
     }
+
+    @Override
+    public void preBegin() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void postBegin() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void preSave() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void postSave() {
+        // TODO Auto-generated method stub
+        
+    }
 }
