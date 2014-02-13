@@ -20,6 +20,6 @@ import org.terasology.entitySystem.Component;
 /**
  * @author Immortius
  */
-public class OpenUiActionComponent implements Component {
-    public String uiwindowid;
+public class OpenNuiActionComponent implements Component {
+    public String nuiwindowid;
 }

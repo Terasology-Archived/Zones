@@ -42,13 +42,13 @@ public class OpenUiAction implements ComponentSystem {
 
     private UIZoneBook zoneBook;
 
-    @ReceiveEvent(components = {ItemComponent.class, OpenUiActionComponent.class})
+    @ReceiveEvent(components = {ItemComponent.class, OpenNuiActionComponent.class})
     public void onActivate(ActivateEvent event, EntityRef entity) {
-        OpenUiActionComponent uiInfo = entity.getComponent(OpenUiActionComponent.class);
+        OpenNuiActionComponent uiInfo = entity.getComponent(OpenNuiActionComponent.class);
         if (uiInfo != null) {
             // TODO: there's no way to register programmically-created instances of windows yet short of creating asset resolvers and factories.
             // For the moment, hardcode the asset resolution since we'll end up making it into a file-based asset eventually anyway.
-            if ("zonebook".equals(uiInfo.uiwindowid)) {
+            if ("zonebook".equals(uiInfo.nuiwindowid)) {
                 if (null == zoneBook) {
                     zoneBook = new UIZoneBook();
                 }

@@ -23,8 +23,8 @@
         "consumedOnUse" : false,
         "renderWithIcon" : false
     },
-    "OpenUiAction" : {
-    	"uiwindowid" : "zonebook"
+    "OpenNuiAction" : {
+    	"nuiwindowid" : "zonebook"
     },
     "CraftRecipe" : {
     	"fullMatch": false,
