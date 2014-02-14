@@ -16,14 +16,18 @@
 package org.terasology.zone.selection;
 
 import java.awt.Color;
+import java.util.Arrays;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.asset.Assets;
+import org.terasology.common.nui.MenuHUDElement;
+import org.terasology.common.nui.UIMenuItem;
+import org.terasology.common.nui.UISingleClickList;
 import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.event.ReceiveEvent;
-import org.terasology.entitySystem.systems.ComponentSystem;
+import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.inventory.InventoryComponent;
@@ -41,7 +45,7 @@ import org.terasology.zone.Constants;
 
 @Share(ZoneToolSystem.class)
 @RegisterSystem(RegisterMode.AUTHORITY)
-public class ZoneToolSystem implements ComponentSystem {
+public class ZoneToolSystem extends BaseComponentSystem {
     private static final Logger logger = LoggerFactory.getLogger(ZoneToolSystem.class);
 
     @In
@@ -54,6 +58,46 @@ public class ZoneToolSystem implements ComponentSystem {
 
     @Override
     public void initialise() {
+        MenuHUDElement menuHUDElement = MenuHUDElement.getMenuHudElement();
+        
+        final UISingleClickList<UIMenuItem> menu = menuHUDElement.getMenu();
+        final UISingleClickList<UIMenuItem> submenu = menuHUDElement.getSubmenu();
+        // final UISingleClickList<UIMenuItem> subSubMenu = menuHUDElement.getSubSubMenu();
+        
+        final UIMenuItem selectZoneButton = new UIMenuItem("Select current", new Runnable() {
+            @Override
+            public void run() {
+                submenu.setVisible(false);
+            }
+        });
+        
+        final UIMenuItem cancelZoneButton = new UIMenuItem("Cancel Current", new Runnable() {
+            @Override
+            public void run() {
+                submenu.setVisible(false);
+            }
+        });
+        
+        final UIMenuItem showZoneButton = new UIMenuItem("Show Zones", new Runnable() {
+            @Override
+            public void run() {
+                submenu.setVisible(false);
+            }
+        });
+        
+        final UIMenuItem zonesMenu = new UIMenuItem("Zones", new Runnable() {
+            @Override
+            public void run() {
+                submenu.setList(Arrays.asList(new UIMenuItem[] {
+                        selectZoneButton,    cancelZoneButton, showZoneButton
+                }));
+                submenu.setVisible(true);
+            }
+        });
+
+        menu.getList().add(zonesMenu);
+
+
         BlockSelectionComponent blockSelectionComponent = new BlockSelectionComponent();
         Color transparentGreen = new Color(0, 255, 0, 100);
         blockSelectionComponent.texture = Assets.get(TextureUtil.getTextureUriForColor(transparentGreen), Texture.class);
@@ -110,30 +154,6 @@ public class ZoneToolSystem implements ComponentSystem {
     @ReceiveEvent
     public void onSelection(ApplyBlockSelectionEvent event, EntityRef entity) {
         setCurrentlySelectedRegion(event.getSelection());
-    }
-
-    @Override
-    public void preBegin() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void postBegin() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void preSave() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void postSave() {
-        // TODO Auto-generated method stub
-        
     }
 
 }
