@@ -15,8 +15,6 @@
  */
 package org.terasology.zone.selection;
 
-import java.awt.Color;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.asset.Assets;
@@ -36,6 +34,7 @@ import org.terasology.registry.In;
 import org.terasology.registry.Share;
 import org.terasology.rendering.assets.texture.Texture;
 import org.terasology.rendering.assets.texture.TextureUtil;
+import org.terasology.rendering.nui.Color;
 import org.terasology.world.selection.BlockSelectionComponent;
 import org.terasology.zone.Constants;
 

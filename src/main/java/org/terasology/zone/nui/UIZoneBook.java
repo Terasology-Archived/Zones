@@ -28,6 +28,7 @@ import org.terasology.math.Vector3i;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.rendering.assets.texture.Texture;
 import org.terasology.rendering.assets.texture.TextureUtil;
+import org.terasology.rendering.nui.Color;
 import org.terasology.rendering.nui.CoreScreenLayer;
 import org.terasology.rendering.nui.UIWidget;
 import org.terasology.rendering.nui.itemRendering.StringTextRenderer;
@@ -685,7 +686,7 @@ public class UIZoneBook extends CoreScreenLayer {
     private void showSelectedZone() {
         if (EntityRef.NULL != lastSelectedZone) {
             BlockSelectionComponent blockSelectionComponent = lastSelectedZone.getComponent(BlockSelectionComponent.class);
-            blockSelectionComponent.texture = Assets.get(TextureUtil.getTextureUriForColor(new java.awt.Color(255, 255, 0, 100)), Texture.class);
+            blockSelectionComponent.texture = Assets.get(TextureUtil.getTextureUriForColor(new Color(255, 255, 0, 100)), Texture.class);
             blockSelectionComponent.shouldRender = true;
             // we probably don't want to save a selected zone rendering state as on
             // zoneComponent.blockSelectionEntity.saveComponent(blockSelectionComponent);
