@@ -16,7 +16,7 @@
 package org.terasology.zone;
 
 import org.terasology.entitySystem.Component;
-import org.terasology.math.Vector3i;
+import org.terasology.math.geom.Vector3i;
 
 public class ZoneSelectionComponent implements Component {
     public Vector3i startpos;

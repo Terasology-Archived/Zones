@@ -17,7 +17,7 @@ package org.terasology.zone;
 
 import org.terasology.entitySystem.Component;
 import org.terasology.math.Region3i;
-import org.terasology.math.Vector3i;
+import org.terasology.math.geom.Vector3i;
 
 public final class ZoneComponent implements Component {
 

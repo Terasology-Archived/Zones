@@ -4,6 +4,6 @@
     "author" : "Overdhose, mkienenb",
     "displayName" : "Zones",
     "description" : "Zones provides the ability to select a block region, then name and classify the selected region as a zone",
-    "dependencies" : [],
+    "dependencies" : [{"id" : "Core", "minVersion" : "2.0.0"}],
     "isServerSideOnly" : false
 }
