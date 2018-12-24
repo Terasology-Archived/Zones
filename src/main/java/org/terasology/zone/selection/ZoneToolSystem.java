@@ -17,7 +17,6 @@ package org.terasology.zone.selection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.asset.Assets;
 import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.event.ReceiveEvent;
@@ -35,6 +34,7 @@ import org.terasology.registry.Share;
 import org.terasology.rendering.assets.texture.Texture;
 import org.terasology.rendering.assets.texture.TextureUtil;
 import org.terasology.rendering.nui.Color;
+import org.terasology.utilities.Assets;
 import org.terasology.world.selection.BlockSelectionComponent;
 import org.terasology.zone.Constants;
 
@@ -55,7 +55,7 @@ public class ZoneToolSystem implements ComponentSystem {
     public void initialise() {
         BlockSelectionComponent blockSelectionComponent = new BlockSelectionComponent();
         Color transparentGreen = new Color(0, 255, 0, 100);
-        blockSelectionComponent.texture = Assets.get(TextureUtil.getTextureUriForColor(transparentGreen), Texture.class);
+        blockSelectionComponent.texture = Assets.get(TextureUtil.getTextureUriForColor(transparentGreen), Texture.class).get();
         currentBlockSelectionDisplayEntity = entityManager.create(blockSelectionComponent);
 
     }
@@ -74,7 +74,7 @@ public class ZoneToolSystem implements ComponentSystem {
             logger.warn(uri + " could not be created and given to player.");
             item.destroy();
         }
-            
+
     }
 
     public void setCurrentlySelectedRegion(Region3i currentBlockSelectionRegion) {
@@ -114,25 +114,25 @@ public class ZoneToolSystem implements ComponentSystem {
     @Override
     public void preBegin() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void postBegin() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void preSave() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void postSave() {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

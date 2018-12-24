@@ -15,16 +15,11 @@
  */
 package org.terasology.zone.nui;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.terasology.asset.Assets;
 import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.math.Region3i;
-import org.terasology.math.Vector2i;
-import org.terasology.math.Vector3i;
+import org.terasology.math.geom.Vector2i;
+import org.terasology.math.geom.Vector3i;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.rendering.assets.texture.Texture;
 import org.terasology.rendering.assets.texture.TextureUtil;
@@ -47,6 +42,7 @@ import org.terasology.rendering.nui.widgets.UILabel;
 import org.terasology.rendering.nui.widgets.UIList;
 import org.terasology.rendering.nui.widgets.UISpace;
 import org.terasology.rendering.nui.widgets.UIText;
+import org.terasology.utilities.Assets;
 import org.terasology.world.selection.BlockSelectionComponent;
 import org.terasology.zone.Constants;
 import org.terasology.zone.ZoneComponent;
@@ -54,12 +50,16 @@ import org.terasology.zone.ZoneTrackingSystem;
 import org.terasology.zone.ZoneType;
 import org.terasology.zone.selection.ZoneToolSystem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class UIZoneBook extends CoreScreenLayer {
     private static final int MAX_SELECTED_BOUNDS = 50;
 
     /*
      * @In private LocalPlayer localPlayer;
-     * 
+     *
      * @In private EntityManager entityManager;
      */
     private final UIImage background;
@@ -177,12 +177,12 @@ public class UIZoneBook extends CoreScreenLayer {
         //        maximize();
         //        setCloseKeys(new int[]{Keyboard.KEY_ESCAPE});
 
-        
+
         RelativeLayout windowLayout = new RelativeLayout();
         this.setContents(windowLayout);
 
         background = new UIImage();
-        background.setImage(Assets.getTexture(Constants.MODULE_NAME + ":" + "openbook"));
+        background.setImage(Assets.getTexture(Constants.MODULE_NAME + ":" + "openbook").get());
         background.setVisible(true);
 //        "layoutInfo" : {
 //            "width" : 512,
@@ -207,7 +207,7 @@ public class UIZoneBook extends CoreScreenLayer {
         bookLeftRightPageLayout.setColumns(2);
         // Match background for rest of layout area
         windowLayout.addWidget(bookLeftRightPageLayout, backgroundRelativeLayoutHint);
-        
+
         RowLayoutHint rowLayoutHint = new RowLayoutHint();
         rowLayoutHint.setUseContentWidth(true);
 
@@ -251,7 +251,7 @@ public class UIZoneBook extends CoreScreenLayer {
                 VerticalHint.create().center()); // TODO: 20
         lblzonenameRelativeLayoutHint.setUsingContentWidth(true);
         lblzonenameRelativeLayoutHint.setUsingContentHeight(true);
-         bookRightPageLayout.addWidget(lblzonename, lblzonenameRelativeLayoutHint);
+        bookRightPageLayout.addWidget(lblzonename, lblzonenameRelativeLayoutHint);
 
         txtzonename = new UIText();
         //        txtzonename.setColor(Color.toColorString(Color.BLACK));
@@ -436,7 +436,6 @@ public class UIZoneBook extends CoreScreenLayer {
         btnCloseRelativeLayoutHint.setWidth(50);
         btnCloseRelativeLayoutHint.setHeight(20);
         bookRightPageLayout.addWidget(btnClose, btnCloseRelativeLayoutHint);
-
 
 
         UISpace fillUpSpace = new UISpace(new Vector2i(1, 60));
@@ -636,8 +635,7 @@ public class UIZoneBook extends CoreScreenLayer {
             if (outofboundselection(currentSelectedRegion)) {
                 btnSave.setVisible(true);
                 lblError.setText("The zone is to big to be saved, depth, width, height should not exceed 50");
-            }
-            else {
+            } else {
                 btnSave.setVisible(true);
             }
             btnDelete.setVisible(false);
@@ -686,7 +684,7 @@ public class UIZoneBook extends CoreScreenLayer {
     private void showSelectedZone() {
         if (EntityRef.NULL != lastSelectedZone) {
             BlockSelectionComponent blockSelectionComponent = lastSelectedZone.getComponent(BlockSelectionComponent.class);
-            blockSelectionComponent.texture = Assets.get(TextureUtil.getTextureUriForColor(new Color(255, 255, 0, 100)), Texture.class);
+            blockSelectionComponent.texture = Assets.get(TextureUtil.getTextureUriForColor(new Color(255, 255, 0, 100)), Texture.class).get();
             blockSelectionComponent.shouldRender = true;
             // we probably don't want to save a selected zone rendering state as on
             // zoneComponent.blockSelectionEntity.saveComponent(blockSelectionComponent);
